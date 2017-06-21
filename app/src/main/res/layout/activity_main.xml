@@ -153,7 +153,118 @@
         Next you should finish the Experience and Projects section of our main UI on your own.
         Check out "preview.png" to see what it should look like.
     -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginBottom="@dimen/spacing_small">
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/caption_text_size"
+            android:textAllCaps="true"
+            android:layout_weight="1"
+            android:text="@string/section_experience" />
+
+
+        <ImageButton
+            android:id="@+id/add_experience_btn"
+            android:layout_width="@dimen/icon_button_size"
+            android:layout_height="@dimen/icon_button_size"
+            android:src="@drawable/ic_add_black_18px"
+            android:background="?attr/selectableItemBackground"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/experience_company"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="LinkedIn (Mar ~ Aug 2015)" />
+
+
+        <ImageButton
+            android:id="@+id/edit_experience_btn"
+            android:layout_width="@dimen/icon_button_size"
+            android:layout_height="@dimen/icon_button_size"
+            android:src="@drawable/ic_mode_edit_black_18dp"
+            android:background="?attr/selectableItemBackground"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/experience_work"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="- Complete\n- Mango DB\n- Scala" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginBottom="@dimen/spacing_small">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/caption_text_size"
+            android:textAllCaps="true"
+            android:layout_weight="1"
+            android:text="@string/section_projects" />
+
+
+        <ImageButton
+            android:id="@+id/add_projects_btn"
+            android:layout_width="@dimen/icon_button_size"
+            android:layout_height="@dimen/icon_button_size"
+            android:src="@drawable/ic_add_black_18px"
+            android:background="?attr/selectableItemBackground"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/projects_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="LinkedIn (Mar ~ Aug 2015)" />
+
+
+        <ImageButton
+            android:id="@+id/edit_project_btn"
+            android:layout_width="@dimen/icon_button_size"
+            android:layout_height="@dimen/icon_button_size"
+            android:src="@drawable/ic_mode_edit_black_18dp"
+            android:background="?attr/selectableItemBackground"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/project_work"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="- Complete\n- Mango DB\n- Scala" />
     <!--
         TODO 6: Wrap a ScrollView around the root LinearLayout
         Congrats! You have made it this far!
