@@ -121,6 +121,12 @@
             ImageButton with id "edit_education_btn" and set its image to a "pencil" icon
             Have we already used the "pencil" icon in this file?
         -->
+        <ImageButton
+            android:id="@+id/edit_education_btn"
+            android:layout_width="@dimen/icon_button_size"
+            android:layout_height="@dimen/icon_button_size"
+            android:src="@drawable/ic_mode_edit_black_18dp"
+            android:background="?attr/selectableItemBackground"/>
 
     </LinearLayout>
 
