@@ -2,7 +2,10 @@ package com.jiuzhang.guojing.awesomeresume;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
 
 import com.jiuzhang.guojing.awesomeresume.model.BasicInfo;
 import com.jiuzhang.guojing.awesomeresume.model.Education;
@@ -15,7 +18,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private BasicInfo basicInfo;
-    private Education education;
+    private List<Education> educations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setupBasicInfoUI();
-        setupEducationUI();
+        setupEducationsUI();
     }
 
     private void setupBasicInfoUI() {
@@ -37,20 +40,31 @@ public class MainActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.email)).setText(basicInfo.email);
     }
 
-    private void setupEducationUI() {
-        // TODO 3: Display the education data onto the UI
-        // Follow the example in setupBasicInfoUI
-        // You will probably find formatItems method useful when displaying the courses
-        ((TextView) findViewById(R.id.education_school)).setText(education.school + "(" + DateUtils.dateToString(education.startDate) + " ~ " + DateUtils.dateToString(education.endDate) + ")");
-        ((TextView) findViewById(R.id.education_courses)).setText(formatItems(education.courses));
+    private  void  setupEducationsUI() {
+        LinearLayout educationContainer = (LinearLayout) findViewById(R.id.educations);
+
+        for(Education education : educations) {
+            View view = getEducationView(education);
+            educationContainer.addView(view);
+        }
     }
+
+    private View getEducationView(Education education) {
+        // LayoutInflater: inflate a layout
+        // inflate, read a layout xml file and transfer it into a tree
+        View view = getLayoutInflater().inflate(R.layout.education_item, null);
+        ((TextView) view.findViewById(R.id.education_school)).setText(education.school + "(" + DateUtils.dateToString(education.startDate) + " ~ " + DateUtils.dateToString(education.endDate) + ")");
+        ((TextView) view.findViewById(R.id.education_courses)).setText(formatItems(education.courses));
+        return view;
+    }
+
 
     private void fakeData() {
         basicInfo = new BasicInfo();
         basicInfo.name = "Jing Guo";
         basicInfo.email = "guojing@jiuzhang.com";
 
-        education = new Education();
+        Education education = new Education();
         education.school = "THU";
         education.major = "Computer Science";
         education.startDate = DateUtils.stringToDate("09/2013");
@@ -65,6 +79,25 @@ public class MainActivity extends AppCompatActivity {
         education.courses.add("Algorithm");
         education.courses.add("Networks");
 
+        Education education2 = new Education();
+        education2.school = "UCLA";
+        education2.major = "Computer Science";
+        education2.startDate = DateUtils.stringToDate("09/2013");
+
+        // TODO 1: Set the endDate
+        // Follow the above example for startDate
+        // DateUtils is a class written by ourselves, check out util/DateUtils
+        education2.endDate = DateUtils.stringToDate("12/2015");
+        // TODO 2: Add some fake courses in education1.courses
+        education2.courses = new ArrayList<>();
+        education2.courses.add("Database");
+        education2.courses.add("Algorithm");
+        education2.courses.add("Networks");
+
+
+        educations = new ArrayList<>();
+        educations.add(education);
+        educations.add(education2);
     }
 
     public static String formatItems(List<String> items) {
