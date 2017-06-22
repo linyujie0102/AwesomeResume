@@ -9,4 +9,10 @@
     <string name="edit_education">Edit education</string>
 
     <string name="user_picture">User picture</string>
+    
+    <string name="start_date">Start date</string>
+    <string name="end_date">End date</string>
+    <string name="education_edit_school_hint">School</string>
+    <string name="education_edit_major_hint">Major</string>
+    <string name="education_edit_courses_hint">Courses</string>
 </resources>
