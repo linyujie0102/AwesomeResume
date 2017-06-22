@@ -1,8 +1,10 @@
 package com.jiuzhang.guojing.awesomeresume;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -55,6 +57,14 @@ public class MainActivity extends AppCompatActivity {
         View view = getLayoutInflater().inflate(R.layout.education_item, null);
         ((TextView) view.findViewById(R.id.education_school)).setText(education.school + "(" + DateUtils.dateToString(education.startDate) + " ~ " + DateUtils.dateToString(education.endDate) + ")");
         ((TextView) view.findViewById(R.id.education_courses)).setText(formatItems(education.courses));
+        ((ImageButton) view.findViewById(R.id.edit_education_btn)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //start desired activity: standard procedure
+                Intent intent = new Intent(MainActivity.this, EducationEditActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
