@@ -15,4 +15,5 @@
     <string name="education_edit_school_hint">School</string>
     <string name="education_edit_major_hint">Major</string>
     <string name="education_edit_courses_hint">Courses</string>
+    <string name="action_save">Save</string>
 </resources>
