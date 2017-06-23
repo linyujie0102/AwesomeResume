@@ -3,6 +3,7 @@ package com.jiuzhang.guojing.awesomeresume;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -157,8 +158,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
     // delete education in educations if delete btn in EducationEditActivity is triggered
-    private void deleteEducation(String educationID) {
-
+    private void deleteEducation(@NonNull String educationId) {
+        for(int i = 0; i < educations.size(); i++) {
+            Education e = educations.get(i);
+            if(TextUtils.equals(educationId, e.id)) {
+                educations.remove(i);
+                break;
+            }
+        }
+        ModelUtils.save(this, MODEL_EDUCATIONS, educations);
+        setupEducations();
     }
 
     private void loadData() {
