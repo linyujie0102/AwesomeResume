@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
         setupEducations();
     }
 
+    // initially load data to memory from hard drive
     private void loadData() {
 
         List<Education> savedEducations = ModelUtils.read(this, MODEL_EDUCATIONS, new TypeToken<List<Education>>(){});
