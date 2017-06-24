@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">AwesomeResume</string>
 
+    <string name="action_delete">Delete</string>
+
     <string name="edit_basic_info">Edit basic info</string>
 
     <string name="section_education">Education</string>

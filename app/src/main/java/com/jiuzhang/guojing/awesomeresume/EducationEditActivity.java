@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -21,15 +22,16 @@ import java.util.Arrays;
  * Created by linyujie on 6/21/17.
  */
 
+@SuppressWarnings("ConstantConditions")
 public class EducationEditActivity extends EditBaseActivity<Education> {
 
     public static final String KEY_EDUCATION = "education";
     public static final String KEY_EDUCATION_ID = "education_id";
-
     @Override
     protected int getlayoutID() {
         return R.layout.activity_education_edit;
     }
+
 
     @Override
     protected Education initializeData() {
@@ -38,11 +40,11 @@ public class EducationEditActivity extends EditBaseActivity<Education> {
 
     @Override
     protected void setupUIForCreate() {
-
+        findViewById(R.id.education_edit_delete).setVisibility(View.GONE);
     }
 
     @Override
-    protected void setupUIForEdit(@NonNull Education data) {
+    protected void setupUIForEdit(@NonNull final Education data) {
         ((EditText) findViewById(R.id.education_edit_school)).setText(data.school);
         ((EditText) findViewById(R.id.education_edit_major)).setText(data.major);
         ((EditText) findViewById(R.id.education_edit_start_date)).setText(DateUtils.dateToString(data.startDate));
@@ -50,6 +52,16 @@ public class EducationEditActivity extends EditBaseActivity<Education> {
         ((EditText) findViewById(R.id.education_edit_courses)).setText(TextUtils.join("\n", data.courses));
 
         //TODO add delete btn
+        findViewById(R.id.education_edit_delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra(KEY_EDUCATION_ID, data.id);
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
+
+            }
+        });
 
     }
 

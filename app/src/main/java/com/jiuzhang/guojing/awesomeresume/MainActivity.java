@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             //get layout from xml file and transfer it to a tree
             View educationView = getLayoutInflater().inflate(R.layout.education_item, null);
             setupEducation(educationView, education);
+            educationLayout.addView(educationView);
         }
 
     }
@@ -154,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         // after update Education, show educations on UI
         ModelUtils.save(this, MODEL_EDUCATIONS, educations);
         setupEducations();
-        // save the result to
+
 
     }
     // delete education in educations if delete btn in EducationEditActivity is triggered

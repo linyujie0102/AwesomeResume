@@ -19,8 +19,8 @@ public abstract class EditBaseActivity<T> extends AppCompatActivity {
     private T data;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         //setup content view
         setContentView(getlayoutID());
