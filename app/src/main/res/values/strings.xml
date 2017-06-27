@@ -9,6 +9,7 @@
 
     <string name="add_education">Add education</string>
     <string name="edit_education">Edit education</string>
+    <string name="edit_experience">Edit experience</string>
 
     <string name="user_picture">User picture</string>
     
@@ -18,4 +19,7 @@
     <string name="education_edit_major_hint">Major</string>
     <string name="education_edit_courses_hint">Courses</string>
     <string name="action_save">Save</string>
+    <string name="experience_edit_company_hint">Company</string>
+    <string name="experience_edit_title_hint">Title</string>
+    <string name="experience_edit_detail">Job description</string>
 </resources>
