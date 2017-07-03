@@ -3,6 +3,7 @@ package com.jiuzhang.guojing.awesomeresume;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.jiuzhang.guojing.awesomeresume.model.BasicInfo;
 import com.jiuzhang.guojing.awesomeresume.model.Education;
+import com.jiuzhang.guojing.awesomeresume.model.Experience;
 import com.jiuzhang.guojing.awesomeresume.util.DateUtils;
 import com.jiuzhang.guojing.awesomeresume.util.ModelUtils;
 
@@ -26,14 +28,17 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final String MODEL_EDUCATIONS = "educations";
+    private static final String MODEL_EXPERIENCE = "experiences";
 
 
     // request code start from 100
     private static final int REQ_CODE_EDUCATION_EDIT = 100;
+    private static final int REQ_CODE_EXPERIENCE_EDIT = 101;
 
     // set up data structure for BasicInfo, Education, Experience and Project
     private BasicInfo basicInfo;
     private List<Education> educations;
+    private List<Experience> experiences;
 
 
 
@@ -64,6 +69,15 @@ public class MainActivity extends AppCompatActivity {
                         Education education = data.getParcelableExtra(EducationEditActivity.KEY_EDUCATION);
                         updateEducation(education);
                     }
+
+                case REQ_CODE_EXPERIENCE_EDIT:
+                    String experienceID = data.getStringExtra(ExperienceEditActivity.KEY_EXPERIENCE_ID);
+                    if (experienceID != null) {
+                        deleteExperience(experienceID);
+                    } else {
+                        Experience experience = data.getParcelableExtra(ExperienceEditActivity.KEY_EXPERIENCE);
+                        updateExperience(experience);
+                    }
             }
         }
     }
@@ -81,9 +95,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        // image button for experience, on click, jump to ExperienceEditActivity
+        ImageButton addExperienceBtn = (ImageButton) findViewById(R.id.add_experience_btn);
+        addExperienceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ExperienceEditActivity.class);
+                startActivityForResult(intent, REQ_CODE_EXPERIENCE_EDIT);
+            }
+        });
+
         //other UI setup including Basic Info, Education, Experiences
 
         setupEducations();
+        setupExperiences();
     }
 
 
@@ -102,6 +128,21 @@ public class MainActivity extends AppCompatActivity {
             educationLayout.addView(educationView);
         }
 
+    }
+
+    // function to setup experiences in main activity
+    private void setupExperiences() {
+        LinearLayout experienceLayout = (LinearLayout) findViewById(R.id.experiences);
+
+        // first remove all View inside the linear layout, for update purpose.
+        experienceLayout.removeAllViews();
+
+        // add all experience info from experiences list
+        for(Experience experience : experiences) {
+            View experienceView = getLayoutInflater().inflate(R.layout.experience_item, null);
+            setupExperience(experienceView, experience);
+            experienceLayout.addView(experienceView);
+        }
     }
 
     // help function to setup a single education view
@@ -125,6 +166,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // help function to setup a single experience view
+    private void setupExperience(View experienceView, final Experience experience) {
+        String dateString = DateUtils.dateToString(experience.startDate) + " ~ " + DateUtils.dateToString(experience.endDate);
+        ((TextView)experienceView.findViewById(R.id.experience_company)).setText(experience.company + " " +
+                                                            experience.title + " (" + dateString + ")");
+        ((TextView)experienceView.findViewById(R.id.experience_details)).setText(formatItems(experience.details));
+
+        // setup image button for edit experience
+        ImageButton editExperiencebtn = (ImageButton) experienceView.findViewById(R.id.edit_experience_btn);
+        editExperiencebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ExperienceEditActivity.class);
+                intent.putExtra(ExperienceEditActivity.KEY_EXPERIENCE, experience);
+                startActivityForResult(intent, REQ_CODE_EXPERIENCE_EDIT);
+            }
+        });
+    }
     // help function to setup course in formate, can be static, can be used anywhere
     public static String formatItems(List<String> items) {
         StringBuilder sb = new StringBuilder();
@@ -158,6 +217,27 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    // update experiences after editing
+    private void updateExperience(Experience experience) {
+        boolean found = false;
+        for (int i = 0; i < experiences.size(); i++) {
+            Experience e = experiences.get(i);
+            if(TextUtils.equals(e.id, experience.id)) {
+                found = true;
+                experiences.set(i, experience);
+                break;
+            }
+        }
+        if(!found) {
+            experiences.add(experience);
+        }
+
+        // after update Experience, show experiences on UI
+        ModelUtils.save(this, MODEL_EXPERIENCE, experiences);
+        setupExperiences();
+    }
+
     // delete education in educations if delete btn in EducationEditActivity is triggered
     private void deleteEducation(@NonNull String educationId) {
         for(int i = 0; i < educations.size(); i++) {
@@ -171,11 +251,27 @@ public class MainActivity extends AppCompatActivity {
         setupEducations();
     }
 
+    // delete experience in experiences if delete btn in ExperienceEditActivity is triggered
+    private void deleteExperience(@NonNull String experienceId) {
+        for(int i = 0; i < experiences.size(); i++) {
+            Experience e = experiences.get(i);
+            if(TextUtils.equals(experienceId, e.id)) {
+                experiences.remove(i);
+                break;
+            }
+        }
+        ModelUtils.save(this,MODEL_EXPERIENCE, experiences);
+        setupExperiences();
+    }
+
     // initially load data to memory from hard drive
     private void loadData() {
 
         List<Education> savedEducations = ModelUtils.read(this, MODEL_EDUCATIONS, new TypeToken<List<Education>>(){});
         educations = savedEducations == null ? new ArrayList<Education>() : savedEducations;
+
+        List<Experience> savedExperiences = ModelUtils.read(this, MODEL_EXPERIENCE, new TypeToken<List<Experience>>(){});
+        experiences = savedExperiences == null ? new ArrayList<Experience>() : savedExperiences;
     }
 
 

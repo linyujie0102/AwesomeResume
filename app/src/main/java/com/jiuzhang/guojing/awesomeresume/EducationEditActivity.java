@@ -51,7 +51,7 @@ public class EducationEditActivity extends EditBaseActivity<Education> {
         ((EditText) findViewById(R.id.education_edit_end_date)).setText(DateUtils.dateToString(data.endDate));
         ((EditText) findViewById(R.id.education_edit_courses)).setText(TextUtils.join("\n", data.courses));
 
-        //TODO add delete btn
+
         findViewById(R.id.education_edit_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
