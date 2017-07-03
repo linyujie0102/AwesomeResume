@@ -24,11 +24,12 @@ import com.jiuzhang.guojing.awesomeresume.util.ModelUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @SuppressWarnings("ConstantConditions")
 public class MainActivity extends AppCompatActivity {
 
     private static final String MODEL_EDUCATIONS = "educations";
-    private static final String MODEL_EXPERIENCE = "experiences";
+    private static final String MODEL_EXPERIENCES = "experiences";
 
 
     // request code start from 100
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                         Education education = data.getParcelableExtra(EducationEditActivity.KEY_EDUCATION);
                         updateEducation(education);
                     }
+                    break;
 
                 case REQ_CODE_EXPERIENCE_EDIT:
                     String experienceID = data.getStringExtra(ExperienceEditActivity.KEY_EXPERIENCE_ID);
@@ -78,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                         Experience experience = data.getParcelableExtra(ExperienceEditActivity.KEY_EXPERIENCE);
                         updateExperience(experience);
                     }
+                    break;
             }
         }
     }
@@ -115,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
     // function to setup educations in main activity
     private void setupEducations() {
-        LinearLayout educationLayout = (LinearLayout) findViewById(R.id.educations);
+        LinearLayout educationLayout = (LinearLayout) findViewById(R.id.educations_list);
 
         //first remove all View inside the linear layout, for update purpose.
         educationLayout.removeAllViews();
@@ -132,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
     // function to setup experiences in main activity
     private void setupExperiences() {
-        LinearLayout experienceLayout = (LinearLayout) findViewById(R.id.experiences);
+        LinearLayout experienceLayout = (LinearLayout) findViewById(R.id.experiences_list);
 
         // first remove all View inside the linear layout, for update purpose.
         experienceLayout.removeAllViews();
@@ -234,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // after update Experience, show experiences on UI
-        ModelUtils.save(this, MODEL_EXPERIENCE, experiences);
+        ModelUtils.save(this, MODEL_EXPERIENCES, experiences);
         setupExperiences();
     }
 
@@ -260,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
         }
-        ModelUtils.save(this,MODEL_EXPERIENCE, experiences);
+        ModelUtils.save(this,MODEL_EXPERIENCES, experiences);
         setupExperiences();
     }
 
@@ -270,8 +273,10 @@ public class MainActivity extends AppCompatActivity {
         List<Education> savedEducations = ModelUtils.read(this, MODEL_EDUCATIONS, new TypeToken<List<Education>>(){});
         educations = savedEducations == null ? new ArrayList<Education>() : savedEducations;
 
-        List<Experience> savedExperiences = ModelUtils.read(this, MODEL_EXPERIENCE, new TypeToken<List<Experience>>(){});
-        experiences = savedExperiences == null ? new ArrayList<Experience>() : savedExperiences;
+        List<Experience> savedExperience = ModelUtils.read(this,
+                MODEL_EXPERIENCES,
+                new TypeToken<List<Experience>>(){});
+        experiences = savedExperience == null ? new ArrayList<Experience>() : savedExperience;
     }
 
 

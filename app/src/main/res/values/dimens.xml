@@ -10,5 +10,6 @@
     <dimen name="icon_button_size">24dp</dimen>
 
     <dimen name="caption_text_size">25sp</dimen>
+    <dimen name="user_picture_jumbo_height">180dp</dimen>
 
 </resources>

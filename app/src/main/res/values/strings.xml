@@ -22,4 +22,5 @@
     <string name="experience_edit_company_hint">Company</string>
     <string name="experience_edit_title_hint">Title</string>
     <string name="experience_edit_detail">Job description</string>
+    <string name="choose_user_picture">choose user picture</string>
 </resources>

@@ -17,7 +17,9 @@ import java.util.Arrays;
  * Created by linyujie on 7/2/17.
  */
 
+@SuppressWarnings("ConstantConditions")
 public class ExperienceEditActivity extends EditBaseActivity<Experience> {
+
     public static final String KEY_EXPERIENCE = "experience";
     public static final String KEY_EXPERIENCE_ID = "experience_id";
 

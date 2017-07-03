@@ -88,7 +88,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/educations"
+            android:id="@+id/educations_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"/>
@@ -120,7 +120,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/experiences"
+            android:id="@+id/experiences_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"/>
