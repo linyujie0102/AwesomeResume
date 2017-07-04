@@ -23,4 +23,9 @@
     <string name="experience_edit_title_hint">Title</string>
     <string name="experience_edit_detail">Job description</string>
     <string name="choose_user_picture">choose user picture</string>
+    <string name="basic_info_edit_name_hint">Your name</string>
+    <string name="basic_info_edit_email_hint">Your email</string>
+    <string name="project_edit_name_hint">Project name</string>
+    <string name="project_edit_details_hint">Project details</string>
+    <string name="edit_project">edit project</string>
 </resources>

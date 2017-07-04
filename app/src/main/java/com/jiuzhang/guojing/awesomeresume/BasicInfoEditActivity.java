@@ -85,7 +85,6 @@ public class BasicInfoEditActivity extends EditBaseActivity<BasicInfo> {
             @Override
             public void onClick(View view) {
                 if (!PermissionUtils.checkPermission(BasicInfoEditActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                    System.out.println("haha");
                     PermissionUtils.requestReadExternalStoragePermission(BasicInfoEditActivity.this);
                 } else {
                     pickImage();
